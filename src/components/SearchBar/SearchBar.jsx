@@ -13,6 +13,7 @@ const SearchBar = () => {
     const [movieSelect, setMovieSelect] = useState("a");
 
     const [listData, setListData] = useState([]);
+    const [isFavorite, setIsFavorite] = useState([]);
 
     useEffect(() => {
         let movieArray = [];
@@ -20,8 +21,9 @@ const SearchBar = () => {
         let moviesId = window.localStorage.movies ? window.localStorage.movies.split(",") : [];
 
         for (let i = 0; i < moviesId.length; i++) {
+            setIsFavorite(prevValue => [...prevValue, + moviesId[i]])
             axios
-                .get(`https://api.themoviedb.org/3/movie/${moviesId[i]}?api_key=ed82f4c18f2964e75117c2dc65e2161d&language=fr-FR`)
+            .get(`https://api.themoviedb.org/3/movie/${moviesId[i]}?api_key=ed82f4c18f2964e75117c2dc65e2161d&language=fr-FR`)
                 .then((res) => movieArray.push(res.data))
                 .then(() => setListData(movieArray))
         }
@@ -42,10 +44,29 @@ const SearchBar = () => {
         if (!storedData.includes(movieId.toString())) {
             storedData.push(movieId);
             window.localStorage.movies = storedData;
-
+            
             axios.get(`https://api.themoviedb.org/3/movie/${movieId}?api_key=ed82f4c18f2964e75117c2dc65e2161d&language=fr-FR`)
-                .then((res) => setListData([...listData, res.data]))
+            .then((res) => setListData([...listData, res.data]))
+
+            setIsFavorite([...isFavorite, + movieId]);
+            console.log(storedData);
         }
+        else {
+            const newData = storedData.filter((id) => +id !== +movieId);
+            window.localStorage.movies = newData;
+            setIsFavorite(prevValue => (
+                    prevValue.filter((id) => +id !== +movieId)
+                )
+            );
+            setListData(prevValue => (
+                    prevValue.filter(({id}) => +id !== +movieId)
+                )
+            );
+        }
+    }
+
+    const loadFavoris = (e) => {
+        e.preventDefault()
     }
 
     useEffect(() => {
@@ -64,7 +85,7 @@ const SearchBar = () => {
                         <button onClick={searchMovie} type='submit'>Rechercher</button>
                     </div>
                     <div className="container-search-favoris">
-                        <button data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" onClick={(e) => e.preventDefault()}><AiFillStar size="20" className="me-2" />Favoris</button>
+                        <button data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" onClick={loadFavoris}><AiFillStar size="20" className="me-2" />Favoris</button>
                     </div>
                 </form>
             </div>
@@ -73,14 +94,14 @@ const SearchBar = () => {
                     return (
                         <div className="card container-result-item" key={movie.id}>
                             <div className='effect-hover-img-txt'>
-                                <em>{movie.overview}</em>
+                                <em>{movie.overview ? movie.overview : "Aucun sypnosis disponible"}</em>
                                 <img className="card-img-top" src={movie.poster_path ? "https://image.tmdb.org/t/p/original" + movie.poster_path : "./assets/img/poster.png"} alt={movie.title} />
                             </div>
                             <div className="card-body item">
                                 <h5 className="card-title text-center text-light">{movie.title}</h5>
                                 <div className="result-item-favori">
                                     <span>Ajouter aux favoris</span>
-                                    <button className="rounded btn-item-hover" onClick={() => addStorage(movie.id)}><AiFillStar size="20" className="d-flex m-1" /></button>
+                                    <button className="rounded btn-item-hover" onClick={() => addStorage(movie.id)}><AiFillStar size="20" className={`d-flex m-1 ${isFavorite.includes(movie.id) && "text-warning"}` } /></button>
                                 </div>
                             </div>
                         </div>
