@@ -1,0 +1,26 @@
+.container-result {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 100%;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+}
+
+.container-result-item {
+    width: 225px;
+    height: 450px;
+}
+.container-result-item img {
+    max-width: 250px;
+    height: 300px;
+    object-fit: fill;
+}
+
+.item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: var(--color-black);
+}

@@ -1,0 +1,60 @@
+/* Couleurs */
+:root {
+  --color-primary:rgb(138, 14, 14);
+  --color-white:rgb(238, 238, 238);
+  --color-grey: #bdbebf;
+  --color-black: #212529;
+}
+
+@font-face {
+  font-family: "Game Of Squids";
+  src: url(../public/assets/fonts/Game\ Of\ Squids.ttf);
+}
+@font-face {
+  font-family: "BebasNeue";
+  src: url(../public/assets/fonts/BebasNeue-Regular.ttf);
+}
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  user-select: none;
+}
+
+li {
+  list-style-type: none;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  margin: 0 auto;
+  color: var(--color-grey);
+  background-color: var(--color-black);
+}
+
+h1 {
+  margin: 1rem 0;
+  font-family: "Game Of Squids";
+}
+
+:focus-visible {
+  outline: none;
+}
