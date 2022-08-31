@@ -24,10 +24,29 @@
 .container-result-item h5 {
     font-size: medium;
 }
-.container-result-item img {
+
+.effect-hover-img-txt img {
     max-width: 250px;
     height: 300px;
     object-fit: fill;
+}
+
+.effect-hover-img-txt em {
+    position: absolute;
+    padding: 0.4rem;
+    opacity: 0;
+    height: 100%;
+    text-align: center;
+    overflow-y: scroll;
+    max-height: 300px;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.effect-hover-img-txt em:hover {
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.8);
+
 }
 
 .item {

@@ -64,7 +64,7 @@ const SearchBar = () => {
                         <button onClick={searchMovie} type='submit'>Rechercher</button>
                     </div>
                     <div className="container-search-favoris">
-                        <button data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" onClick={(e) => e.preventDefault()}>voir mes Favoris</button>
+                        <button data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" onClick={(e) => e.preventDefault()}><AiFillStar size="20" className="me-2" />Favoris</button>
                     </div>
                 </form>
             </div>
@@ -72,7 +72,10 @@ const SearchBar = () => {
                 {moviesData.map((movie) => {
                     return (
                         <div className="card container-result-item" key={movie.id}>
-                            <img className="card-img-top" src={movie.poster_path ? "https://image.tmdb.org/t/p/original" + movie.poster_path : "./assets/img/poster.png"} alt={movie.title} />
+                            <div className='effect-hover-img-txt'>
+                                <em>{movie.overview}</em>
+                                <img className="card-img-top" src={movie.poster_path ? "https://image.tmdb.org/t/p/original" + movie.poster_path : "./assets/img/poster.png"} alt={movie.title} />
+                            </div>
                             <div className="card-body item">
                                 <h5 className="card-title text-center text-light">{movie.title}</h5>
                                 <div className="result-item-favori">
