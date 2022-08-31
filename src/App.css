@@ -1,6 +1,5 @@
 h1.title {
-    margin: 5rem;
-    font-size: 3rem;
+    margin: 2rem;
     color: var(--color-white);
     text-shadow: 4px 2px 8px #000;
 }

@@ -4,7 +4,7 @@ import SearchBar from './components/SearchBar/SearchBar';
 function App() {
   return (
     <div className='container'>
-      <h1 className='text-center title'>notre application cinema</h1>
+      <h1 className='text-center title'>Chercher un film</h1>
       <SearchBar />
     </div>
   );

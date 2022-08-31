@@ -58,3 +58,23 @@ h1 {
 :focus-visible {
   outline: none;
 }
+
+hr {
+  width: 100%;
+  border: 0;
+  margin: 0 auto;
+  height: 1px;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgb(196, 196, 196), rgba(255, 255, 255, 0));
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #1b1f24;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #495057;
+}
